@@ -1,35 +1,114 @@
 ## Title: A/B Testing
 # Author: Oluwadara Olamide 
-## About Data
-I used the Fast-Food Marketing Campaign A\B Test dataset gotten from 
-(https://www.kaggle.com/datasets/chebotinaa/fast-food-marketing-campaign-ab-test). 
-# Task
-Analyze the A/B test and provide recommendations.
-Some notes:
-- The dataset is aggregated by LocationID, PromotionID and week. I should aggregate by LocationID and PromotionID before conducting the statistical tests.
-- Since there are three marketing campaigns and Ihave to select the best-performing one, I will have to conduct several tests, comparing campaigns against one another.. This kind of testing is known as pairwise comparisons and it suffers from the [multiple testing problem](https://en.wikipedia.org/wiki/Multiple_comparisons_problem) - if we run a lot of tests, there’s an increased chance of getting a type I error (false positive). It is therefore suggested to use the confidence level of 99% instead of the traditional 95% in your graded task.
-# Evaluation Criteria
-- General understanding of the topic
-- [A/B Testing] SQL queries are correct and follow SQL best practices.
-- [A/B Testing] Metrics are correctly calculated.
-- The document with AB test results is clear, concise and follows the required structure.
-- [A/B Testing] The results of statistical tests are performed and interpreted correctly.
-- Analytical approach to the problem. Did the learner use their analysis to provide justified, useful and actionable insights?
 
-# Additional Resources for this Sprint
-Probability, statistical inference and A/B testing are all incredibly rich topics. If you are curious to learn more, jump into the resources below or save them for later use.
+## Project Title
+Fast Food Marketing Campaign A/B Test Analysis
 
-- Probability
- - (optional) Harvard course - [Fat Chance](https://www.edx.org/learn/probability/harvard-university-fat-chance-probability-from-the-ground-up?webview=false&campaign=Fat+Chance%3A+Probability+from+the+Ground+Up&source=edx&product_category=course&placement_url=https%3A%2F%2Fwww.edx.org%2Flearn%2Fprobability)
- - (optional) Harvard course - [Introduction to Probability](https://www.edx.org/learn/probability/harvard-university-introduction-to-probability?webview=false&campaign=Introduction+to+Probability&source=edx&product_category=course&placement_url=https%3A%2F%2Fwww.edx.org%2Flearn%2Fprobability)
-- Statistical Inference
-  - (optional) [Naked Statistics: Stripping the Dread from the Data](https://www.amazon.com/Naked-Statistics-Stripping-Dread-Data-ebook/dp/B007Q6XLF2/ref=sr_1_1?crid=33VPRFJX4VFIL&dib=eyJ2IjoiMSJ9.OKn1Bp9Nz1pH-8oKG1xpCysMkcs3yXSTIrd3esT-pKM339nsXKQBroxUPAVsp7v7WXA35YGdn2TfFza-6QJHobwGY7I8_0WVMY8DVQDSrpx8fRokBVGVN0Q-Yu1w7T5qUYkFBnme9sBo0lOrApsIwTO-0KOlY-WEJdv125Q8xGtZBghb6-aAbVbNr6eP-oRV-BHBV1g2HFqfNvMakj_bC9jtGY2DoG4pDZAsflXVtwc.yesyDDR7bEC7jNqbvhhWcqA9pDJLzycMidMk4fUcO1Q&dib_tag=se&keywords=naked+statistics&qid=1712002647&sprefix=naked+statistic%2Caps%2C163&sr=8-1)
-  - (optional) [What is a p-value anyway?](https://www.amazon.com/p-value-Stories-Actually-Understand-Statistics/dp/0321629302/ref=sr_1_1?crid=2J9EWYJPTW73N&dib=eyJ2IjoiMSJ9.gWDvAFBbVRFPWje42tkIfQKHupn_dR73DYfm0eyiQs0bg2pjLjp_WMRDs9fqpDREimG43FJzC6upLsKSJw3OLoyq2ZGJxP4dFcqcHL84Jbg1Sf52HxaAaKNtRy1CQ8JBkvIjOqv4BfkoEBdSj2FSsx-UIdA75L8zRjtruPf_0bjuWPqwkC3AukBW8uzgQk2iRhUuvH_Yv7_o5z3VgvgAbTY2BtSotkCdmtlsx1wCUBQ.KXuyH48qZAfXpa4_QI6qS1crxeyw0J6TeZ94KwWvZZw&dib_tag=se&keywords=what+is+a+p+value+anyway&qid=1712002724&sprefix=what+is+a+p+value%2Caps%2C172&sr=8-1)
-  - (optional) [Andrew Gelman Blog](https://statmodeling.stat.columbia.edu/)
-  - (optional) [Harvard’s Statistics 110: Probability course](https://projects.iq.harvard.edu/stat110)
-  - (optional) [Richard McElreath - Statistical Rethinking](https://xcelab.net/rm/)
-  - (optional) [Allen Downey Blog](https://www.allendowney.com/blog/)
-- A/B Testing
-  - (optional) [Ronny Kohavi, Diane Tang, Ya Xu - Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing](https://www.amazon.com/Trustworthy-Online-Controlled-Experiments-Practical)
+## Introduction
+This project analyses an **A/B marketing experiment** conducted by a fast-food chain planning to introduce a new menu item. The business tested **three different marketing promotions** across multiple store locations to determine which campaign generated the highest sales impact.
+
+The analysis was completed as part of a graded task using the **Fast Food Marketing Campaign A/B Test dataset**, available in the `turing_data_analytics.wa_marketing_campaign` table.
+
+## Objective
+
+The primary goal of this analysis is to:
+
+* Evaluate the performance of three marketing promotions.
+* Apply appropriate **A/B testing and statistical inference techniques**.
+* Identify the most effective marketing strategy.
+* Provide **data-driven, actionable recommendations** to stakeholders.
+
+## Dataset Overview
+The dataset consists of **546 rows and 7 columns**, aggregated by location, promotion, and week.
+
+### Columns
+
+* **MarketID** – Unique identifier for the market
+* **MarketSize** – Size of the market area by sales
+* **LocationID** – Unique identifier for store location
+* **AgeOfStore** – Store age in years
+* **Promotion** – Marketing promotion (1, 2, or 3)
+* **Week** – One of four weeks the promotion was run
+* **SalesInThousands** – Weekly sales amount
+  
+## Tools & Technologies
+
+* **Google BigQuery** – Data aggregation and preparation
+* **Statistical Testing** – Pairwise t-tests with Bonferroni correction
+* **Documentation** – All SQL and analysis stored in **`module 3 sprint 4.docx`**
+
+## Analytical Approach
+
+### Data Preparation
+
+* The dataset was **aggregated by LocationID and Promotion** prior to statistical testing, as required.
+* Weekly sales were summed per location to avoid repeated-measures bias.
+
+### A/B Testing Strategy
+
+* Since **three promotions** were tested, **pairwise comparisons** were conducted:
+
+  * Promotion 1 vs Promotion 2
+  * Promotion 1 vs Promotion 3
+  * Promotion 2 vs Promotion 3
+
+### Statistical Considerations
+
+* A **99% confidence level** was used instead of 95% to reduce the risk of **Type I errors**.
+* **Bonferroni correction** was applied to account for multiple comparisons:
+[
+\alpha_{adjusted} = 0.01 / 3 = 0.0033
+]
+
+## Aggregated Results
+
+| Promotion | Avg Sales | Std Dev | No. of Locations |
+| --------- | --------- | ------- | ---------------- |
+| 1         | 232.40    | 64.11   | 43               |
+| 2         | 189.32    | 57.99   | 47               |
+| 3         | 221.46    | 65.54   | 47               |
+
+## Statistical Test Results
+
+### Promotion 1 vs Promotion 2
+
+* **t-statistic:** 3.33
+* **p-value:** 0.00128
+
+✅ Statistically significant difference
+➡ Promotion 1 performs better than Promotion 2.
 
 
+### Promotion 1 vs Promotion 3
+
+* **t-statistic:** 0.80
+* **p-value:** 0.426
+
+❌ No statistically significant difference detected.
+
+### Promotion 2 vs Promotion 3
+
+* **t-statistic:** −2.52
+* **p-value:** 0.0136
+
+❌ No statistically significant difference detected at the adjusted significance level.
+
+## Conclusion
+
+* **Promotion 1 significantly outperforms Promotion 2** in terms of average sales.
+* There is **no statistically significant difference** between:
+
+  * Promotion 1 and Promotion 3
+  * Promotion 2 and Promotion 3
+
+## Recommendation
+
+Based on the statistical evidence:
+
+* **Promotion 1** should be prioritised as the primary marketing strategy.
+* The business should consider **continuing or expanding Promotion 1** to maximise sales performance.
+* Further experimentation could be conducted to differentiate Promotion 1 and Promotion 3 more clearly.
+
+## Appendix
+
+All SQL queries used for data aggregation and preparation are documented in **Appendix 1** of the file: **`module 3 sprint 4.docx`**
